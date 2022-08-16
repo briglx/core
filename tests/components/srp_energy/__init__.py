@@ -1,4 +1,5 @@
 """Tests for the SRP Energy integration."""
+<<<<<<< HEAD
 
 from homeassistant.components.srp_energy.const import CONF_IS_TOU
 from homeassistant.const import CONF_ID, CONF_PASSWORD, CONF_USERNAME
@@ -10,12 +11,34 @@ ACCNT_PASSWORD = "ana"
 ACCNT_NAME = "Home"
 
 TEST_USER_INPUT = {
+=======
+import datetime as dt
+
+from homeassistant.components.srp_energy import CONF_IS_TOU, PHOENIX_TIME_ZONE
+from homeassistant.const import CONF_ID, CONF_NAME, CONF_PASSWORD, CONF_USERNAME
+
+TEST_DATE = dt.datetime(2022, 8, 2, 0, 0, 0, 0, tzinfo=PHOENIX_TIME_ZONE)
+
+ACCNT_NAME = "Test Home"
+ACCNT_ID = "123456789"
+ACCNT_USERNAME = "abba"
+ACCNT_PASSWORD = "ana"
+ACCNT_IS_TOU = False
+
+TEST_USER_INPUT = {
+    CONF_NAME: ACCNT_NAME,
+>>>>>>> d4351a2295 (Add new Sensors using Data coordinators)
     CONF_ID: ACCNT_ID,
     CONF_USERNAME: ACCNT_USERNAME,
     CONF_PASSWORD: ACCNT_PASSWORD,
     CONF_IS_TOU: ACCNT_IS_TOU,
 }
 
+<<<<<<< HEAD
+=======
+TEST_SENSOR_COUNT = 12
+
+>>>>>>> d4351a2295 (Add new Sensors using Data coordinators)
 MOCK_USAGE = [
     ("7/31/2022", "00:00 AM", "2022-07-31T00:00:00", "1.2", "0.19"),
     ("7/31/2022", "01:00 AM", "2022-07-31T01:00:00", "1.3", "0.20"),
