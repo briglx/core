@@ -1,4 +1,6 @@
 """The SRP Energy integration."""
+from __future__ import annotations
+
 from srpenergy.client import SrpEnergyClient
 
 from homeassistant.config_entries import ConfigEntry
@@ -15,13 +17,16 @@ from .const import (  # noqa: F401
     ATTRIBUTION,
     CONF_IS_TOU,
     DEFAULT_NAME,
+    DEVICE_NAME_ENERGY,
+    DEVICE_NAME_PRICE,
     DOMAIN,
-    ICON,
     LOGGER,
     PHOENIX_TIME_ZONE,
     SENSOR_NAME,
-    SENSOR_TYPE,
+    TIME_DELTA_BETWEEN_API_UPDATES,
+    TIME_DELTA_BETWEEN_UPDATES,
 )
+from .coordinator import SrpApiCoordinator, SrpCoordinator
 
 PLATFORMS = [Platform.SENSOR]
 
@@ -32,6 +37,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     api_username: str = entry.data[CONF_USERNAME]
     api_password: str = entry.data[CONF_PASSWORD]
     name: str = entry.data[CONF_NAME]
+    is_tou: bool = entry.data.get(CONF_IS_TOU, False)
 
     LOGGER.debug("%s Using account_id %s", name, api_account_id)
 
@@ -40,9 +46,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         api_username,
         api_password,
     )
+    api_coordinator = SrpApiCoordinator(hass, api_instance, name, is_tou)
+    coordinator = SrpCoordinator(
+        hass=hass, api=api_instance, api_coordiator=api_coordinator, name=name
+    )
+    await api_coordinator.async_config_entry_first_refresh()
+    await coordinator.async_config_entry_first_refresh()
 
     hass.data.setdefault(DOMAIN, {})
-    hass.data[DOMAIN][entry.entry_id] = api_instance
+    hass.data[DOMAIN][entry.entry_id] = coordinator
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
 

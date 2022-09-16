@@ -1,7 +1,13 @@
 """Tests for the SRP Energy integration."""
 
-from homeassistant.components.srp_energy import CONF_IS_TOU
+import datetime as dt
+
+from homeassistant.components.srp_energy import CONF_IS_TOU, PHOENIX_TIME_ZONE
 from homeassistant.const import CONF_ID, CONF_NAME, CONF_PASSWORD, CONF_USERNAME
+from homeassistant.util import dt as dt_util
+
+phx_time_zone = dt_util.get_time_zone(PHOENIX_TIME_ZONE)
+TEST_DATE = dt.datetime(2022, 8, 2, 0, 0, 0, 0, tzinfo=phx_time_zone)
 
 ACCNT_ID = "123456789"
 ACCNT_IS_TOU = False
@@ -17,7 +23,7 @@ TEST_USER_INPUT = {
     CONF_IS_TOU: ACCNT_IS_TOU,
 }
 
-ENTRY_OPTIONS: dict[str, str] = {}
+TEST_SENSOR_COUNT = 1
 
 MOCK_USAGE = [
     ("7/31/2022", "00:00 AM", "2022-07-31T00:00:00", "1.2", "0.19"),
