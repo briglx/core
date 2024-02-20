@@ -126,6 +126,8 @@ Write-Host "#########################"
 Write-Host "# Backend configuration #"
 Write-Host "#########################"
 
+
+
 # Install dev certificate
 if ($IsLinux) {
     dotnet dev-certs https
@@ -177,10 +179,10 @@ $appsettingsOverrides = @{
             Scopes   = $varScopes
         }
     };
-    Planner = @{
+    Planner        = @{
         Model = $PlannerModel
     };
-    KernelMemory = @{
+    KernelMemory   = @{
         TextGeneratorType = $AIService;
         DataIngestion     = @{
             EmbeddingGeneratorTypes = @($AIService)
@@ -190,7 +192,7 @@ $appsettingsOverrides = @{
         };
         Services          = $AIServiceOverrides;
     };
-    Frontend = @{
+    Frontend       = @{
         AadClientId = $FrontendClientId
     };
 }
