@@ -10,6 +10,25 @@ import {
     tokens,
 } from '@fluentui/react-components';
 
+// export const semanticKernelBrandRamp: BrandVariants = {
+//     10: '#060103',
+//     20: '#261018',
+//     30: '#431426',
+//     40: '#591732',
+//     50: '#701A3E',
+//     60: '#861F4B',
+//     70: '#982C57',
+//     80: '#A53E63',
+//     90: '#B15070',
+//     100: '#BC627E',
+//     110: '#C6748B',
+//     120: '#CF869A',
+//     130: '#D898A8',
+//     140: '#E0AAB7',
+//     150: '#E8BCC6',
+//     160: '#EFCFD6',
+// };
+
 export const semanticKernelBrandRamp: BrandVariants = {
     10: '#060103',
     20: '#261018',
@@ -17,7 +36,7 @@ export const semanticKernelBrandRamp: BrandVariants = {
     40: '#591732',
     50: '#701A3E',
     60: '#861F4B',
-    70: '#982C57',
+    70: '#2c5f98',
     80: '#A53E63',
     90: '#B15070',
     100: '#BC627E',
